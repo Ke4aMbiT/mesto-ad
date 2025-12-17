@@ -15,59 +15,44 @@ import {
     clearValidation,
 } from "./components/validation.js";
 
-// ======================
-// DOM-элементы
-// ======================
-
 const placesWrap = document.querySelector(".places__list");
-
-// Попап редактирования профиля
 const profileFormModalWindow = document.querySelector(".popup_type_edit");
 const profileForm = profileFormModalWindow.querySelector(".popup__form");
 const profileTitleInput = profileForm.querySelector(
     ".popup__input_type_name"
 );
+
 const profileDescriptionInput = profileForm.querySelector(
     ".popup__input_type_description"
 );
 
-// Попап добавления карточки
 const cardFormModalWindow = document.querySelector(".popup_type_new-card");
 const cardForm = cardFormModalWindow.querySelector(".popup__form");
 const cardNameInput = cardForm.querySelector(
     ".popup__input_type_card-name"
 );
-const cardLinkInput = cardForm.querySelector(".popup__input_type_url");
 
-// Попап изображения
+const cardLinkInput = cardForm.querySelector(".popup__input_type_url");
 const imageModalWindow = document.querySelector(".popup_type_image");
 const imageElement = imageModalWindow.querySelector(".popup__image");
 const imageCaption = imageModalWindow.querySelector(".popup__caption");
-
-// Кнопки
 const openProfileFormButton = document.querySelector(
     ".profile__edit-button"
 );
-const openCardFormButton = document.querySelector(".profile__add-button");
 
-// Профиль
+const openCardFormButton = document.querySelector(".profile__add-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(
     ".profile__description"
 );
-const profileAvatar = document.querySelector(".profile__image");
 
-// Попап аватара
+const profileAvatar = document.querySelector(".profile__image");
 const avatarFormModalWindow = document.querySelector(
     ".popup_type_edit-avatar"
 );
+
 const avatarForm = avatarFormModalWindow.querySelector(".popup__form");
 const avatarInput = avatarForm.querySelector(".popup__input");
-
-// ======================
-// Настройки валидации
-// ======================
-
 const validationSettings = {
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
@@ -76,10 +61,6 @@ const validationSettings = {
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible",
 };
-
-// ======================
-// Обработчики
-// ======================
 
 const handlePreviewPicture = ({ name, link }) => {
     imageElement.src = link;
@@ -123,17 +104,9 @@ const handleCardFormSubmit = (evt) => {
     closeModalWindow(cardFormModalWindow);
 };
 
-// ======================
-// Слушатели форм
-// ======================
-
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
 avatarForm.addEventListener("submit", handleAvatarFormSubmit);
-
-// ======================
-// Открытие попапов
-// ======================
 
 openProfileFormButton.addEventListener("click", () => {
     profileTitleInput.value = profileTitle.textContent;
@@ -154,10 +127,6 @@ profileAvatar.addEventListener("click", () => {
     openModalWindow(avatarFormModalWindow);
 });
 
-// ======================
-// Рендер карточек
-// ======================
-
 initialCards.forEach((data) => {
     placesWrap.append(
         createCardElement(data, {
@@ -168,18 +137,10 @@ initialCards.forEach((data) => {
     );
 });
 
-// ======================
-// Закрытие попапов
-// ======================
-
 const allPopups = document.querySelectorAll(".popup");
 
 allPopups.forEach((popup) => {
     setCloseModalWindowEventListeners(popup);
 });
-
-// ======================
-// Включение валидации
-// ======================
 
 enableValidation(validationSettings);
